@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
-  get 'access/login'
+  # get 'access/login'
 
-  get 'access/register'
+  # get 'access/register'
 
   # get 'events/index'
 
   # get 'events/view'
+  
+  root 'events#index'
+
   match ':controller(/:action(/:id))', :via => [:get, :post]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

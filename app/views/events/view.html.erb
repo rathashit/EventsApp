@@ -1,0 +1,54 @@
+<header>
+	<legend><h2><%= @event.name %></h2>	</legend>
+</header>
+<content class="view-event">
+	<div class="view-content">
+		<p><i class="glyphicon glyphicon-map-marker"></i>&nbsp;<%= @event.location %></p>
+		<p><i class="glyphicon glyphicon-calendar"></i>&nbsp;<%= @date %></p>
+		<p><i class="glyphicon glyphicon-time"></i>&nbsp;<%= @event.start_doe.strftime("%I:%M %p") +" to " + @event.end_doe.strftime("%I:%M %p") %></p>
+		<p><i class="fa fa-inr"></i>&nbsp;<%= @event.fee %></p>	
+		<p><h3>Description</h3> <%= @event.desc %> </p>
+		<div class = "attend">
+			<% if logged_in %> 
+				<% if @expired %>
+					<p>Event Expired</p>
+				<% else %>
+					<% if @attending %>
+						<%= link_to("Unattend",{:action => 'disenroll', :event_id => @event.id}, :class => 'btn btn-danger btn-sm btn-block')%>
+					<% else %>
+						<%= link_to("Attend",{:action => 'confirm', :event_id => @event.id}, :class => 'btn btn-success btn-sm btn-block') %>
+					<% end %>
+				<% end %>
+			<% else %>
+				<%= link_to("Login to attend this event",{:controller => 'access',:action => 'login'}) %>
+			<% end %> 
+		</div>
+	</div>
+	<aside>
+		<% if logged_in %> 
+			<% if @expired %>
+				<h3>People Attended</h3>
+			<% else %>
+				<h3>People Attending</h3>
+			<% end %>	
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Gender</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @event.users.each do |user| %>
+						<tr>
+							<td><%= user.name %></td>
+							<td><%= user.gender %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		<% end %>
+	</aside>
+</content>
+
+

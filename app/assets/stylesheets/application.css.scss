@@ -1,0 +1,89 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@font-face {
+   font-family: 'Glyphicons Halflings';
+   src: url('/assets/glyphicons-halflings-regular.eot');
+   src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+      url('/assets/glyphicons-halflings-regular.woff') format('woff'),
+      url('/assets/glyphicons-halflings-regular.ttf') format('truetype'),
+      url('/assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+.view-event .view-content
+{
+	width: 65%;
+	padding-right: 5%;
+	float: left;	
+}
+.view-event aside
+{
+	width: 30%;
+	float: right;
+	h3
+	{
+		padding-top: 0;
+		margin-top: 0;
+		text-align: center;
+	}
+}
+.flash-notice,.flash-alert
+{
+	padding-top: 0;
+	margin-top: 0;
+	margin-bottom: 15px;
+	height: 30px;
+	width: 100%;
+	text-align: center;
+	
+	p
+	{
+		padding-top: 5px;
+	}
+}
+.flash-notice
+{
+	background: rgba(0,153,37,0.2);
+	color: #009150;
+}
+.flash-alert
+{
+	background: rgba(217,30,24,0.2);
+	color: #D91E18;
+}
+#error_explanation {
+  width: 400px;
+  padding: 7px;
+  padding-bottom: 1px;
+  margin-bottom: 20px;
+  background: rgba(217,30,24,0.2);
+  color: #D91E18;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
+  }
+  ul li {
+    font-size: 12px;
+    list-style: none;
+
+  }
+}

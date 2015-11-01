@@ -1,0 +1,15 @@
+<% @events.each do |event| %>
+	<article>
+		<header>
+			<legend><h3><%= link_to(event.name,{:action => "view", :event_id => event.id}) %></h3></legend>
+		</header>
+		<footer>
+			<p><i class="glyphicon glyphicon-map-marker"></i>&nbsp;<%= event.location %></p>
+			<p><i class="glyphicon glyphicon-calendar"></i>&nbsp;<%= event.start_doe.strftime("%A %d %b %y at %I:%M %p") %></p>
+			<p><i class="fa fa-inr"></i>&nbsp;<%= event.fee %></p>
+		</footer>
+		<div class="event-desc">
+			<p><%= truncate(event.desc, :length => 150) %></p>
+		</div>
+	</article>
+<% end %>

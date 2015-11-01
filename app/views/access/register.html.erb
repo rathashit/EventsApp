@@ -1,0 +1,44 @@
+
+<div class="sign-up">
+	<%= form_for(:user, :url => {:action => 'create'}, :html => {:class => "form-horizontal"} ) do |f| %>
+		<fieldset>
+			<div id="legend">
+				<legend class="">Register</legend>
+			</div>
+			<% if @user.errors.any? %>
+				<div id="error_explanation">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<ul>
+						<% @user.errors.full_messages.each do |error| %>
+							<li><%= error %></li>
+						<% end %>
+					</ul>
+				</div>
+			<% end %> 
+			<div class="control-group">
+				<%= f.label :name,:class => "control-label" %>
+				<div class="controls">
+					<%= f.text_field :name, :class => 'form-control' %>
+				</div>			
+			</div>
+			<div class="control-group">
+				<%= f.label :email, :class => "control-label" %>
+				<%= f.text_field :email, :class => 'form-control'  %>
+			</div>
+			<div class="control-group">
+				<%= f.label :gender, :class => "control-label" %>
+				<%= f.select :gender, User::GENDER_TYPES, {} ,{:class => 'form-control'} %>
+			</div>
+			<div class="control-group">
+				<%= f.label :password, :class => "control-label" %>
+				<%= f.password_field :password, :class => 'form-control'  %>
+			</div>
+			<div class="control-group">
+				<%= f.label :password_confirmation, :class => "control-label" %>
+				<%= f.password_field :password_confirmation, :class => 'form-control'  %>
+			</div>
+			<br>
+			<%= f.submit "Register" , :class => "btn btn-success btn-md btn-block"%>
+	 	</fieldset>
+	<% end %>
+</div>

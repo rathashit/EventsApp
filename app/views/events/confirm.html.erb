@@ -1,0 +1,4 @@
+<h3>Do you confirm?</h3>
+<p>You will be charged with a fee of &nbsp;<i class="fa fa-inr"></i><%= @fee %></p>
+<%= link_to("Confirm",{:action => 'enroll', :event_id => @event.id}, :class => 'btn btn-success btn-sm btn-block')%>
+<%= link_to("Maybe Later",{:action => 'view', :event_id => @event.id}, :class => 'btn btn-danger btn-sm btn-block')%>

@@ -13,11 +13,9 @@
 				<% if @expired %>
 					<p>Event Expired</p>
 				<% else %>
-					<% if @attending %>
-						<%= link_to("Unattend",{:action => 'disenroll', :event_id => @event.id}, :class => 'btn btn-danger btn-sm btn-block')%>
-					<% else %>
-						<%= link_to("Attend",{:action => 'confirm', :event_id => @event.id}, :class => 'btn btn-success btn-sm btn-block') %>
-					<% end %>
+					<%= link_to("Going",{:action => 'change_status', :event_id => @event.id, :status => "yes"}, :class => 'btn btn-success btn-sm btn-block',:disabled => @a_default) %>
+					<%= link_to("Maybe",{:action => 'change_status', :event_id => @event.id, :status => "maybe"}, :class => 'btn btn-warning btn-sm btn-block',:disabled => @m_default)%>
+					<%= link_to("Not Going",{:action => 'change_status', :event_id => @event.id, :status => "no"}, :class => 'btn btn-danger btn-sm btn-block',:disabled => @n_default)%>
 				<% end %>
 			<% else %>
 				<%= link_to("Login to attend this event",{:controller => 'access',:action => 'login'}) %>
@@ -40,10 +38,12 @@
 				</thead>
 				<tbody>
 					<% @event.users.each do |user| %>
-						<tr>
-							<td><%= user.name %></td>
-							<td><%= user.gender %></td>
-						</tr>
+						<% if user.event_entries[0].status == "yes" %>
+							<tr>
+								<td><%= user.name %></td>
+								<td><%= user.gender %></td>
+							</tr>
+						<% end %>
 					<% end %>
 				</tbody>
 			</table>

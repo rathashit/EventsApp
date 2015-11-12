@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 	has_secure_password
 
 	has_many :event_entries
-	has_many :events, :through => :event_entries
+	has_many :events, :through => :event_entries, dependent: :delete_all
 
 	GENDER_TYPES = ["Not Telling", "Male", "Female"]
 

@@ -15,10 +15,18 @@ class EventsController < ApplicationController
       else
         @expired = false
         attend = user.events.where(:id => @event.id).first
+        @a_default = @n_default = @m_default = false
         if attend
-          @attending = true
+          @status = attend.event_entries.where(:event => @event).first.status
+          if @status == "yes"
+            @a_default = true
+          elsif @status == "no"
+            @n_default = true
+          elsif @status == "maybe"
+            @m_default = true  
+          end
         else
-          @attending = false
+            @status = false
         end
       end
     end
@@ -29,27 +37,16 @@ class EventsController < ApplicationController
     end
   end
 
-  def confirm
-    user = User.where(:email => session[:email]).first
+  def change_status
+    @user = User.where(:email => session[:email]).first
     @event = Event.find(params[:event_id])
-    @fee = eventFee(user)
-  end
-  def enroll
-  	user = User.where(:email => session[:email]).first
-  	event = Event.find(params[:event_id])
-  	fee = eventFee(user)
-  	EventEntry.create(:user => user, :event => event, :amount => fee)
-  	flash[:notice] = "You have sucessfully enrolled for this event"
-  	redirect_to(:action => 'view', :event_id => event.id)
-  end
-
-  def disenroll
-  	user = User.where(:email => session[:email]).first
-  	event = Event.find(params[:event_id])
-  	entry = EventEntry.where(:user => user, :event => event).first
-  	entry.destroy
-  	flash[:notice] = "You have sucessfully disenrolled for this event"
-  	redirect_to(:action => 'view', :event_id => event.id)
+    entry = @user.event_entries.where(:event => @event).first
+    if entry.present?
+      entry.update(:status => params[:status])
+    else
+      EventEntry.create(:user => @user, :event => @event, :status => params[:status])
+    end
+    redirect_to(:action => 'view', :event_id => @event.id)
   end
 
 end

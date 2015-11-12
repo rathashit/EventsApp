@@ -15,13 +15,3 @@ class ApplicationController < ActionController::Base
   	end
   end
 end
-
-def eventFee(user)
-  user = User.where(:email => session[:email]).first
-  event = Event.find(params[:event_id])
-  if user.gender == "Female"
-    fee = event.fee - event.fee*0.05
-  else
-    fee = event.fee
-  end
-end

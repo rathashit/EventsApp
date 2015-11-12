@@ -13,13 +13,18 @@
 
 ActiveRecord::Schema.define(version: 20151030180138) do
 
-  create_table "event_entries", force: :cascade do |t|
+  create_table "event_entries", id: false, force: :cascade do |t|
     t.integer  "event_id",   limit: 4
     t.integer  "user_id",    limit: 4
     t.float    "amount",     limit: 24
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.string   "status",     limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
+
+  add_index "event_entries", ["event_id", "user_id"], name: "index_event_entries_on_event_id_and_user_id", using: :btree
+  add_index "event_entries", ["event_id"], name: "index_event_entries_on_event_id", using: :btree
+  add_index "event_entries", ["user_id"], name: "index_event_entries_on_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "name",       limit: 255

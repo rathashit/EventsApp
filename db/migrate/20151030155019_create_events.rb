@@ -1,5 +1,5 @@
 class CreateEvents < ActiveRecord::Migration
-  def change
+  def up
     create_table :events do |t|
     	t.string :name
     	t.string :location
@@ -9,5 +9,8 @@ class CreateEvents < ActiveRecord::Migration
     	t.float :fee
       t.timestamps null: false
     end
+  end
+  def down
+    drop_table :events
   end
 end

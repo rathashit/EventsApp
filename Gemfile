@@ -6,7 +6,7 @@ gem 'therubyracer'
 
 gem 'less-rails'
 
-
+gem 'composite_primary_keys'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
